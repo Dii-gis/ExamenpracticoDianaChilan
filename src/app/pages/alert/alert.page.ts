@@ -1,36 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController} from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.page.html',
   styleUrls: ['./alert.page.scss'],
 })
-export class AlertPage implements OnInit {
+export class AlertPage  {
 
-  handlerMessage = '';
-  roleMessage = '';
-
-  constructor(private alertCtrl: AlertController) { }
-
-  ngOnInit() {
-  }
-
-  /*async presentAlert(){
-    const alert = await this.alertCtrl.create({
-      backdropDismiss: false,
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
-      buttons: ['OK']
-    });
-    await alert.present();
-  };*/
+  constructor(private alertController: AlertController) { }
 
   async presentAlert() {
-    const alert = await this.alertCtrl.create({
-      header: 'Please enter your info',
-      buttons: ['OK','Cancel'],
+    const alert = await this.alertController.create({
+      header: 'Guarde tu informacion',
+      backdropDismiss:false,
+      buttons: ['OK','CANCEL'],
       inputs: [
         {
           placeholder: 'Nombres',
@@ -39,70 +23,39 @@ export class AlertPage implements OnInit {
           placeholder: 'Apellidos',
         },
         {
-          placeholder: 'Descripción Materia',
+          placeholder: 'Descripcion materna',
+          type: 'textarea',
         },
         {
-          type: 'email',
+          placeholder: 'https://ionicframework.com/',
+          type: 'url',
         },
         {
-          type: 'date'
+          placeholder: 'Fecha de nacimiento',
+          type: 'date',
         },
         {
-          placeholder: 'clave',
+          type: 'password',
+          placeholder: 'Clave',
         },
         {
-          placeholder: 'Nickname (max 8 characters)',
+          placeholder: 'Nickname (max 10 characters)',
           attributes: {
-            maxlength: 8,
+            maxlength: 10,
           },
         },
         {
-          placeholder: 'edad',
+          type: 'number',
+          placeholder: 'Edad',
+          min: 1,
+          max: 80,
         },
       ],
     });
-    await alert.present();
 
-  }
-
-  async presentAlertMultipleButton(){
-    const alert = await this.alertCtrl.create({
-      backdropDismiss: false,
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
-      buttons: ['Cancel', 'Opne Modal', 'Delete']
-    });
     await alert.present();
-  };
-  async presentAlertMultilpeButtonAction() {
-    const alert = await this.alertCtrl.create({
-      backdropDismiss: false,
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
-      buttons: [
-      {
-        text: 'OK!',
-        handler: () => {
-        console.log('Click en OK!')
-        }
-      },
-      /*
-      {
-      text: 'Cancelar',
-      handler: () => {
-      console.log('Click en Cancelar')
-      }
-      },
-      */
-      {
-        text: 'Cancelar',
-        role: 'cancel',
-        cssClass: 'rojo'
-      }
-      ]
-      });
-      await alert.present();
-    };
+  }
+
+  
+
 }
